@@ -33,18 +33,61 @@ u {
     height: 100%;
 }
 
-.notes-list-container {
-    flex-basis: 48%;
+.notes-list-container,
+.editor-container {
+    flex-basis: 100%;
     margin: 0 5px;
 }
 
-@media only screen and (max-width: 767px) {
-    .notes-list-container {
-        flex-basis: 100%;
-        margin: 0;
+@media only screen and (max-width: 380px) {
+    .container {
+        max-width: 100%;
+        height: auto;
+        background-size: contain; 
+        background-position: center;
     }
+
+    u {
+        margin-top: 20px;
+    }
+
+    
+    .notepad form input,
+    .notepad form textarea {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .notepad form textarea {
+        height: 100px;
+    }
+
+    .notepad form label {
+        font-size: 15px;
+    }
+    .notepad form {
+        width: 80%; 
+        height: 50%;
+        padding: -15px 0 25px 0;
+    }
+
+
+    .backBtn {
+        margin-top: 20px;
+        margin-bottom: -20px;
+    }
+
+    
 }
 
+
+@media only screen and (max-width: 320px) {
+    .backBtn {
+        margin-top: 40px;
+        margin-bottom: -20px;
+    }
+    
+}
 .notes-list {
     flex: 1;
     padding: 20px;
@@ -73,6 +116,18 @@ u {
 
 
 
+/* inputs */
+
+.inputs label {
+    font-size: 23px;
+    display: block;
+}
+
+.inputs {
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+
 
 
 /* new note button */
@@ -93,10 +148,92 @@ u {
     margin-top: 20px;
 }
 
+
+/* svg icon details */
 svg {
     width: 25px;
     height: 25px;
     opacity: 0.7;
+}
+
+.backBtn svg {
+    width: 15px;
+    height: 20px;
+    fill: white;
+    margin-top: 3px;
+    margin-left: 2px;
+}
+
+
+/* back button */
+
+.backBtn a {
+    background-color: #483838;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    max-height: 25px;
+    width: 20px;
+    padding: 5px;
+    font-size: 15px;
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 50px;
+}
+
+
+
+
+/* add note form */
+
+#add-note-form
+{
+    margin-top: 80px;
+}
+
+/*for submit button */
+.notepad button {
+    text-decoration: none;
+    border: none;
+    background: none;
+    padding: 10px;
+    color: #483838;
+    cursor: pointer;
+}
+
+
+.notepad {
+    flex: 2;
+    padding: 10px;
+}
+
+.notepad form {
+    max-width: 70%;
+    margin-left: 50px;
+    background-color: #fafafa;
+    margin-top: 50px;
+    top: 50%;
+    left: 50%;
+    margin-top: 80px;
+}
+
+.notepad form input,
+.notepad form textarea {
+    background-color: #fafafa;
+    border-radius: 0px;
+    font-family: "Handwritten Font", sans-serif;
+    font-size: 12px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+.notepad h2 {
+    margin-top: 60px;
+    align-items: center;
+    margin-bottom: -20px;
 }
 
 /* general container */
@@ -112,4 +249,7 @@ svg {
     background-image: url(/src/images/notepad.png);
     width: 100%;
     height: 450px;
+    background-size: contain; /* Ensure the image is scaled to fit the container */
+    background-repeat: no-repeat;
+    background-position: center; /* Center the image */
 }
