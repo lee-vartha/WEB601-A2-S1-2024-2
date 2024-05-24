@@ -128,7 +128,17 @@ u {
     background-color: transparent;
 }
 
+/* index.js list reference */
+.note-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
 
+.note-item:hover {
+    background-color: #f0f0f0;
+}
 
 /* new note button */
 
