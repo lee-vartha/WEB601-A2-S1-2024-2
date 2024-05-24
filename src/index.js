@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('delete-note-btn').addEventListener('click', function(event) {
         event.preventDefault();
         var storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        alert("Are you sure you want to delete this note?");
         storedNotes.splice(editingIndex, 1);
         localStorage.setItem('notes', JSON.stringify(storedNotes));
         showNotesListSection();
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
      document.getElementById('backBtnAddNote').addEventListener('click', function(event) {
         event.preventDefault();
         showNotesListSection();
-        editingIndex = -1; // Reset editing index when going back
+        editingIndex = -1; 
     });
 
     // clicking on "back" button in view note section
@@ -112,11 +113,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // function to render notes list
 function renderNotes() {
     var storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-    notesList.innerHTML = ''; // clearing existing list
+    notesList.innerHTML = '';
 
+    if (storedNotes.length === 0) {
+        var emptyListItem = document.createElement('li');
+        emptyListItem.textContent = 'You dont have any notes yet. Click on the icon to add one!';
+        
+    
+        // Append the list item to the notes list
+        notesList.appendChild(emptyListItem);
+    }
+    
+        
+    
     storedNotes.forEach(function(note, index) {
         var listItem = document.createElement('li');
-        listItem.classList.add('note-item'); // Add class for styling
+        listItem.classList.add('note-item'); 
 
         // creating a container div for note title
         var noteContainer = document.createElement('div');
@@ -131,18 +143,21 @@ function renderNotes() {
 
         // event listener to display note content on click
         listItem.addEventListener('click', function() {
-            showViewNoteSection(); // Show view note section
+            showViewNoteSection();
             document.getElementById('view-note-title').value = note.title;
             document.getElementById('view-note-content').value = note.content;
-            editingIndex = index; // Set editing index to current note index
+            editingIndex = index; 
         });
 
-        notesList.appendChild(listItem); // Append list item to notes list
+        
+
+        notesList.appendChild(listItem); 
     });
 }
 
 showNotesListSection();
 renderNotes();
+
 
 
     // Function to handle adding or updating a note
@@ -161,23 +176,39 @@ renderNotes();
             var storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
 
             if (editingIndex === -1) {
-                // If adding a new note, push it to the array
                 storedNotes.push({ title: title, content: content });
             } else {
-                // If editing an existing note, update it
                 storedNotes[editingIndex] = { title: title, content: content };
             }
 
             
             localStorage.setItem('notes', JSON.stringify(storedNotes));
-            showNotesListSection(); // Switch back to the notes list section
-            renderNotes(); // Update the notes list
-            addNoteForm.reset(); // Clear the add note form
-            editNoteForm.reset(); // Clear the edit note form
-            editingIndex = -1; // Reset editing index
+            showNotesListSection(); 
+            renderNotes(); 
+            addNoteForm.reset(); 
+            editNoteForm.reset(); 
+            editingIndex = -1; 
         }
     }
 
+
+    // Function to filter notes based on search input
+function filterNotes() {
+    var input = document.getElementById('search-note').value.toLowerCase();
+    var notes = document.querySelectorAll('.note-item'); 
+    notes.forEach(function(note) { 
+        var title = note.textContent.toLowerCase(); 
+        if (title.includes(input)) { 
+            note.style.display = ''; 
+        } else {
+            note.style.display = 'none'; 
+            
+        }
+    });
+}
+
+// Event listener for search input
+document.getElementById('search-note').addEventListener('input', filterNotes);
 
 
 })
