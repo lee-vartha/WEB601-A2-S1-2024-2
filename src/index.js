@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const notesListSection = document.getElementById('notes-list-section');
     const addNoteSection = document.getElementById('add-note-section');
     const viewNoteSection = document.getElementById('view-note-section');
+    const editNoteSection = document.getElementById('edit-note-section');
     const newNoteBtn = document.getElementById('new-note-btn');
+    const addNoteForm = document.getElementById('add-note-form');
+    const editNoteForm = document.getElementById('edit-note-form');
     const backButton = document.getElementById('back-btn');
     const notesList = document.getElementById('notes-list');
     const viewNoteForm = document.getElementById('view-note-form');
-    const addNoteForm = document.getElementById('add-note-form');
-
 
     let editingIndex = -1;
 
@@ -15,19 +16,30 @@ document.addEventListener('DOMContentLoaded', function() {
         notesListSection.style.display = 'block';
         addNoteSection.style.display = 'none';
         viewNoteSection.style.display = 'none';
+        editNoteSection.style.display = 'none';
     }
 
     function showAddNoteSection() {
         notesListSection.style.display = 'none';
         addNoteSection.style.display = 'block';
         viewNoteSection.style.display = 'none';
+        editNoteSection.style.display = 'none';
     }
 
     function showViewNoteSection() {
         notesListSection.style.display = 'none';
         addNoteSection.style.display = 'none';
         viewNoteSection.style.display = 'block';
+        editNoteSection.style.display = 'none';
     }
+
+    function showEditNoteSection() {
+        notesListSection.style.display = 'none';
+        addNoteSection.style.display = 'none';
+        viewNoteSection.style.display = 'none';
+        editNoteSection.style.display = 'block';
+    }
+
 
     // when clicking on 'new note' button
     newNoteBtn.addEventListener('click', function(event) {
@@ -37,11 +49,42 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
      // Event listener for form submission (adding note)
-    addNoteForm.addEventListener('submit', function(event) {
+     addNoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
         saveOrUpdateNote();
         editingIndex = -1; 
     });
+
+
+     // event listener for form submission (editing note)
+     editNoteForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveOrUpdateNote();
+    });
+
+
+    // when clicking on 'edit' button in the view note section
+    document.getElementById('edit-note-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        showEditNoteSection();
+
+        var title = document.getElementById('view-note-title').value;
+        var content = document.getElementById('view-note-content').value;
+        document.getElementById('edit-note-title').value = title;
+        document.getElementById('edit-note-content').value = content;
+    });
+
+    // when clicking on 'delete' button in the view note section
+    document.getElementById('delete-note-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        var storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        storedNotes.splice(editingIndex, 1);
+        localStorage.setItem('notes', JSON.stringify(storedNotes));
+        showNotesListSection();
+        renderNotes();
+        editingIndex = -1;
+    });
+
 
      // clicking on "back" button in add note section
      document.getElementById('backBtnAddNote').addEventListener('click', function(event) {
@@ -56,6 +99,14 @@ document.addEventListener('DOMContentLoaded', function() {
         showNotesListSection();
         editingIndex = -1;
     });
+
+
+    // clicking on "back" button in edit note section
+    document.getElementById('backBtnEditNote').addEventListener('click', function(event) {
+    event.preventDefault();
+    showViewNoteSection();
+    editingIndex = -1;
+});
 
 
     // function to render notes list
@@ -94,14 +145,18 @@ showNotesListSection();
 renderNotes();
 
 
-
-
     // Function to handle adding or updating a note
     function saveOrUpdateNote() {
         var title, content;
+
+        if (editingIndex !== -1) {
+            title = document.getElementById('edit-note-title').value;
+            content = document.getElementById('edit-note-content').value;
+        } else {
             title = document.getElementById('add-note-title').value;
             content = document.getElementById('add-note-content').value;
-        
+        }
+
         if (title.trim() !== '' && content.trim() !== '') {
             var storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
 
