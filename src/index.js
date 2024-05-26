@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
      addNoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
         saveOrUpdateNote();
+        showToast('toast-add', 'Note added successfully!');
         editingIndex = -1; 
     });
 
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
      editNoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
         saveOrUpdateNote();
+        showToast('toast-edit', 'Note edited successfully!');
     });
 
 
@@ -209,6 +211,30 @@ function filterNotes() {
 
 // Event listener for search input
 document.getElementById('search-note').addEventListener('input', filterNotes);
+
+
+// Function to show toast notification
+function showToast(toastId, message) {
+    var toast = document.getElementById(toastId);
+    toast.textContent = message;
+    toast.className = 'toast-show';
+    setTimeout(function() {
+        toast.className = toast.className.replace('toast-show', '');
+    }, 3000);
+}
+
+// Event listener for the add note form submission
+document.getElementById('add-note-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    addNote(); // Call addNote function to add the note
+});
+
+// Event listener for the edit note form submission
+document.getElementById('edit-note-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    editNote(); // Call editNote function to edit the note
+});
+
 
 
 })
