@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Handwritten Font';
-    src: url('/src/fonts/phitradesign\ Handwritten\ Thin.ttf');
+    src: url('fonts/phitradesign\ Handwritten\ Thin.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -9,7 +9,7 @@ body {
     font-family: 'Handwritten Font', sans-serif;
     margin: 0;
     padding: 0;
-    background: url(/src/images/cork.jpg);
+    background: url('images/cork.jpg');
 }
 
 
@@ -51,6 +51,7 @@ u {
     notepad form {
         margin-right: 30px;
     }
+
     u {
         margin-top: 20px;
     }
@@ -79,9 +80,10 @@ u {
         top: 75%; /* Adjusted top value for lower position */
         opacity: 0.8;
     }    
-
     
 }
+
+
 
 @media only screen and (max-width: 1024px) {
     .new-note-button a {
@@ -137,9 +139,10 @@ u {
     }    
     
 }
+
 .search-container {
     text-align: right; /* Center the input */
-    margin-top: 7px; /* Add margin top for spacing */
+    margin-top: -3px; /* Add margin top for spacing */
     margin-right: 20px;
 
 
@@ -162,7 +165,7 @@ u {
 
 .notes-list ul {
     list-style: none;
-    height: 200px;
+    height: 210px;
     overflow-y: auto; /* means i can have a scroll mechanism if list gets too long */
     padding: 0;
 }
@@ -331,7 +334,7 @@ svg {
 }
 
 .container {
-    background-image: url(/src/images/notepad.png);
+    background-image: url('images/notepad.png');
     width: 100%;
     height: 450px;
     background-size: contain; /* Ensure the image is scaled to fit the container */
@@ -342,8 +345,6 @@ svg {
 
 
 
-
-/* Toast notification styles */
 .toast {
     visibility: hidden;
     min-width: 250px;
@@ -354,13 +355,12 @@ svg {
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1111;
+    z-index: 1000;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
 }
 
-/* Show the toast notification */
 .toast.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;

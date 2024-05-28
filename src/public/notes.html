@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Notepad Application</title>
+    <title>EZnotes</title>
 </head>
 <body>
     
 
-
-
+    <div id="toast-container">
+        <div id="toast-add" class="toast">Note saved successfully!</div>
+        <div id="toast-edit" class="toast">Note saved successfully!</div>
+        <div id="toast-error" class="toast">An error occurred. Please try again.</div>
+        <div id="toast-delete" class="toast">Note deleted successfully!</div>
+    </div>
 
 <!-- viewing the list of notes -->
 <section id="notes-list-section">
@@ -21,7 +25,7 @@
                 <ul id="notes-list"> <!-- List of Notes here --> </ul>
             </div>
             <div class="new-note-button">
-                <a href="#" id="new-note-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <a href="#" id="new-note-btn" onclick="show-toast"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                   </svg></a>
@@ -49,7 +53,7 @@
                 <form id="add-note-form">
                     <div class="inputs">
                         <label for="note-title">Add Title</label>
-                        <input type="text" id="add-note-title" name="note-title" required>
+                        <input type="text" id="add-note-title" name="note-title" maxlength="25" required>
                     </div>
 
                     <div class="inputs">
@@ -57,7 +61,7 @@
                         <textarea id="add-note-content" name="note-content" rows="8" placeholder="write here..." required></textarea>
                     </div>
 
-                    <button type="submit" onclick="toastFunction()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                         <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                       </svg>
                     </button>
@@ -67,6 +71,7 @@
         </div>
     </div>
 </section>
+
 
 <section id="edit-note-section">
     <div class="editor-container">
@@ -86,7 +91,7 @@
                         <label for="note-content">Edit Content</label>
                         <textarea id="edit-note-content" name="note-content" rows="8" required></textarea>
                     </div>
-                    <button type="submit" onclick="toastFunction()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <button type="submit" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                         <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                       </svg></button>
                 </form>
@@ -94,9 +99,6 @@
         </div>
     </div>
 </section>
-
-<div id="toast-add" class="toast">Note added successfully!</div>
-<div id="toast-edit" class="toast">Note edited successfully!</div>
 
 
 <section id="view-note-section">
@@ -131,6 +133,11 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 <script src="index.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
