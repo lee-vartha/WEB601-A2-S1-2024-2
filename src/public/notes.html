@@ -10,7 +10,7 @@
     
 
     <div id="toast-container">
-        <div id="toast-add" class="toast">Note saved successfully!</div>
+        <div id="toast-add" class="toast">Note created successfully!</div>
         <div id="toast-edit" class="toast">Note saved successfully!</div>
         <div id="toast-error" class="toast">An error occurred. Please try again.</div>
         <div id="toast-delete" class="toast">Note deleted successfully!</div>
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="notes-list">
                 <h2><u>List of Notes</u></h2>
-                <ul id="notes-list"> <!-- List of Notes here --> </ul>
+                <ul id="notes-list"> <!-- the list of notes would be here --> </ul>
             </div>
             <div class="new-note-button">
                 <a href="#" id="new-note-btn" onclick="show-toast"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -73,6 +73,7 @@
 </section>
 
 
+<!-- editing a note -->
 <section id="edit-note-section">
     <div class="editor-container">
         <div class="container">
@@ -101,6 +102,7 @@
 </section>
 
 
+<!-- viewing a separate note -->
 <section id="view-note-section">
     <div class="editor-container">
         <div class="container">
@@ -133,11 +135,13 @@
     </div>
 </section>
 
+
+<!-- any bootstrap plugins-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
-<script src="index.js"></script>
+<script src="fe-note.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

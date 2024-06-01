@@ -40,44 +40,45 @@ document.addEventListener('DOMContentLoaded', function() {
         editNoteSection.style.display = 'block';
     }
 
-    function fetchNotes() {
-        fetch('/notes/list')
+// Ensure that this function fetches the notes list correctly
+function fetchNotes() {
+    fetch('/notes/list')
         .then(res => res.json())
         .then(notes => {
             renderNotes(notes);
+            console.log('List loaded');
         })
         .catch(err => console.error('Error:', err));
-    }
+}
 
+// Verify that this function properly renders the notes list
+function renderNotes(notes) {
+    notesList.innerHTML = '';
 
-    // function to render notes list - has been modified to adjust to the API structure
-    // using the local storage was temporary, now we will fetch the notes from the API
-    function renderNotes(notes) {
-        notesList.innerHTML = '';
-    
-        if (notes.length === 0) {
-            const emptyListItem = document.createElement('li');
-            emptyListItem.textContent = 'You dont have any notes yet. Click on the icon to add one!';
-            notesList.appendChild(emptyListItem);
-        } else {
-            notes.forEach(note => {
-                const noteItem = document.createElement('li');
-                noteItem.textContent = note.title;
-                noteItem.classList.add('note-item');
-                noteItem.addEventListener('click', () => showNoteDetails(note));
-                notesList.appendChild(noteItem);
-            })
-        }
+    if (notes.length === 0) {
+        const emptyListItem = document.createElement('li');
+        console.log('Notes list is empty')
+        emptyListItem.textContent = 'You dont have any notes yet. Click on the icon to add one!';
+        notesList.appendChild(emptyListItem);
+    } else {
+        notes.forEach(note => {
+            const noteItem = document.createElement('li');
+            noteItem.textContent = note.title;
+            noteItem.classList.add('note-item');
+            noteItem.addEventListener('click', () => showNoteDetails(note));
+            notesList.appendChild(noteItem);
+        })
     }
-    
-    function showNoteDetails(note) {
-        document.getElementById('view-note-title').textContent = note.title;
-        document.getElementById('view-note-content').textContent = note.content;
-        editingNoteId = note._id;
-        showViewNoteSection();
-    }
-        
+}
 
+// Ensure that this function properly shows the details of a selected note
+function showNoteDetails(note) {
+    console.log(note);
+    document.getElementById('view-note-title').value = note.title;
+    document.getElementById('view-note-content').value = note.content;
+    editingNoteId = note._id;
+    showViewNoteSection();
+}
 
     addNoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -96,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchNotes();
             showNotesListSection();
             addNoteForm.reset();
+            console.log('Note added:', note);
             showToast('toast-add');
         })
         .catch(err => console.error('Error:', err));
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById('edit-note-title').value;
         const content = document.getElementById('edit-note-content').value;
     
-        fetch(`/notes/${editingNoteId}`, {
+        fetch(`/notes/edit/${editingNoteId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -117,11 +119,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(note => {
             fetchNotes();
             showNotesListSection();
+            console.log('Note updated:', note);
             showToast('toast-edit');
         })
         .catch(err => console.error('Error:', err));
     });
-
 
 
     document.getElementById('delete-note-btn').addEventListener('click', function(event) {
@@ -132,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 fetchNotes();
                 showNotesListSection();
+                console.log('Note deleted');
                 showToast('toast-delete');
             })
             .catch(err => console.error('Error:', err));    
@@ -167,14 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-  
-document.getElementById('edit-note-btn').addEventListener('click', function() {
-    const title = document.getElementById('view-note-title').textContent;
-    const content = document.getElementById('view-note-content').textContent;
+  document.getElementById('edit-note-btn').addEventListener('click', function() {
+    const title = document.getElementById('view-note-title').value;
+    const content = document.getElementById('view-note-content').value;
     document.getElementById('edit-note-title').value = title;
     document.getElementById('edit-note-content').value = content;
     showEditNoteSection();
-})
+});
 
 
 

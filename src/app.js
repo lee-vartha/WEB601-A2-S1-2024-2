@@ -2,90 +2,56 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Note = require('./models/note');
 
 const app = express();
 
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
+
+
+// const authJwt = require('./helpers/jwt'); // uncomment when script has been created
+const errorHandler = require('./helpers/error-handler');
+
+// app.use(authJwt()); // uncomment when the script has been created
+app.use(errorHandler);
+
+
+// declaring out the port number for the server
 app.listen(3000, () => {
     console.log("");
     console.log('Server is running on port 3000');
 })
 
+// configuration of the database
 mongoose.connect('mongodb+srv://lee-vartha:hyp1ricuMLeuc5thoe@notepad.lrtnanc.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+}).then(() => {
     console.log("");
     console.log('Connected to MongoDB!');
-});
+}) .catch(err => {
+    console.log('Error:', err.message);
+})
+
+// const db = mongoose.connection;
+
+const api = process.env.API_URL
+
+//handlers for the routes
+const noteRoute = require(`./routes/notes.js`);
+const userRoute = require(`./routes/users.js`);
+
+app.use('/', userRoute);
+app.use('/', noteRoute);
+
+
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes.html'))
+    res.sendFile(path.join(__dirname, 'public/auth.html'))
 })
-
-app.get('/notes/list', async (req, res) => {
-    try {
-        const notes = await Note.find();
-        res.status(200).json(notes);
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
-
-app.post('/notes', async (req,res) => {
-    const {title, content} = req.body;
-    try {
-        const newNote = new Note({
-            title, 
-            content
-        });
-        const savedNote = await newNote.save();
-        res.status(201).json(savedNote);
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
-
-app.put('/notes/:id', async (req, res) => {
-    const {id} = req.params;
-    const {title, content} = req.body;
-    try {
-        const updatedNote = await Note.findByIdAndUpdate(id, {title, content}, {new: true});
-        if (updatedNote) {
-            res.status(200).json(updatedNote);
-        } else {
-            res.status(404).json(err);
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
-})
-
-app.delete('/notes/:id', async (req, res) => {
-    const {id} = req.params;
-    try {
-        const deletedNote = await Note.findByIdAndDelete(id);
-    if (deletedNote) {
-        res.status(200).json(deletedNote);
-    } else {
-        res.status(404).json({message: 'Note not found'});
-    }
-    } catch(err) {
-        res.status(500).json(err);
-    }
-})
-
-
 
 
 module.exports = app;

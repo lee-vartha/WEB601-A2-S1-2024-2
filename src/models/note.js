@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
@@ -10,7 +10,7 @@ const noteSchema = new Schema({
         type: String,
         required: true
     },
-    createdAt: {
+    createdAt: { // this is only seen in the MongoDB database
         type: Date,
         default: Date.now
     }

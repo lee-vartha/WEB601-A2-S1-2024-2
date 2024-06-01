@@ -57,13 +57,13 @@ u {
     }
 
     .notes-list ul {
-        height: 190px;
+        max-height: 170px;
         overflow-y: auto; /* means i can have a scroll mechanism if list gets too long */
         padding: 0;
     }
 
     .notepad form label {
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .notepad form input,
@@ -124,11 +124,12 @@ u {
         width: 80%; 
         height: 50%;
         padding: -15px 0 25px 0;
+        margin-left: -50px;
     }
 
 
     .notes-list ul {
-        height: 150px;
+        max-height: 140px;
         overflow-y: auto; /* means i can have a scroll mechanism if list gets too long */
         padding: 0;
     }
@@ -137,6 +138,10 @@ u {
         top: 61%; /* Adjusted top value for lower position */
         opacity: 0.8;
     }    
+
+    .search-container {
+        margin-top: -50px; /* Adjusted margin top value for spacing */
+    }
     
 }
 
@@ -198,6 +203,11 @@ u {
 
 .inputs label {
     font-size: 23px;
+    display: block;
+}
+
+.inputs-auth label {
+    font-size: 18px;
     display: block;
 }
 
@@ -298,7 +308,7 @@ svg {
 .notepad form {
     max-width: 70%;
     margin-left: 50px;
-    background-color: #fafafa;
+    background-color: transparent;
     margin-top: 50px;
     top: 50%;
     left: 50%;
@@ -307,7 +317,7 @@ svg {
 
 .notepad form input,
 .notepad form textarea {
-    background-color: #fafafa;
+    background-color: transparent;
     border-radius: 0px;
     font-family: "Handwritten Font", sans-serif;
     font-size: 12px;
@@ -317,11 +327,55 @@ svg {
     border: 1px solid #ccc;
 }
 
+.switch-type {
+    /* make it centered */
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.switch-type-signup {
+    /* make it centered */
+    display: flex;
+    justify-content: center;
+    margin-top: -15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+.confirm-btn {
+    background-color: #483838;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 0.5px solid #6b6b6b;
+}
+.notepad h2 {
+    margin-top: 60px;
+    align-items: center;
+    margin-bottom: -20px;
+}
 
 .notepad h2 {
     margin-top: 60px;
     align-items: center;
     margin-bottom: -20px;
+}
+
+.notepad-header h2 {
+    margin-top: 80px;
+    align-items: center;
+    margin-bottom: -60px;
+}
+
+.notepad-header-login h2 {
+    margin-top: 80px;
+    align-items: center;
+    margin-bottom: -60px;
 }
 
 /* general container */
