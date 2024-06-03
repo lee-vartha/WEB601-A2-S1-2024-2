@@ -206,11 +206,6 @@ u {
     display: block;
 }
 
-.inputs-auth label {
-    font-size: 18px;
-    display: block;
-}
-
 .inputs {
     margin-bottom: 10px;
     background-color: transparent;
@@ -327,23 +322,6 @@ svg {
     border: 1px solid #ccc;
 }
 
-.switch-type {
-    /* make it centered */
-    display: flex;
-    justify-content: center;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.switch-type-signup {
-    /* make it centered */
-    display: flex;
-    justify-content: center;
-    margin-top: -15px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
 
 .confirm-btn {
     background-color: #483838;
@@ -366,17 +344,7 @@ svg {
     margin-bottom: -20px;
 }
 
-.notepad-header h2 {
-    margin-top: 80px;
-    align-items: center;
-    margin-bottom: -60px;
-}
 
-.notepad-header-login h2 {
-    margin-top: 80px;
-    align-items: center;
-    margin-bottom: -60px;
-}
 
 /* general container */
 
