@@ -166,7 +166,7 @@ editNoteForm.addEventListener('submit', function(event) {
         },
         body: JSON.stringify({ title, content }) // the body of the request will contain the title and content of the note in a stringified JSON format
     })
-    .then(res => res.json())
+    .then(res => res.json()) // this means the response will be converted to JSON
     .then(note => {
         fetchNotes(); // the updated note will be fetched and added to the database which will then be sent to the note list
         showNotesListSection(); // the screen will then show the notes list section
