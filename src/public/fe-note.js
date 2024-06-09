@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newNoteBtn = document.getElementById('new-note-btn');
     const addNoteForm = document.getElementById('add-note-form');
     const editNoteForm = document.getElementById('edit-note-form');
-    const backButton = document.getElementById('back-btn');
     const notesList = document.getElementById('notes-list');
-    const viewNoteForm = document.getElementById('view-note-form');
 
 
   // this is the id of the note that is being edited (says its null so that it is always a default that a note isnt edited (since the user JUST created it))
@@ -195,8 +193,7 @@ editNoteForm.addEventListener('submit', function(event) {
         }
     });
 
- 
-
+    
 
 // function to filter notes based on search input
 function filterNotes() {

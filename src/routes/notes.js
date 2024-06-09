@@ -15,7 +15,7 @@ router.use(express.static(path.join(__dirname, 'public')));
 // })
 
 // getting the list of notes
-router.get('/notes/list', async (req, res) => {
+router.get('/notes/list', async (_req, res) => {
     const notes = await Note.find();
 
     if(!notes) { // if no notes are found (error in the database, not whether a user has posted or not) then it will return a 500 error  - 500 means internal server error

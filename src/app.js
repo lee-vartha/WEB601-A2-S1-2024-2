@@ -32,8 +32,6 @@ mongoose.connect('mongodb+srv://lee-vartha:hyp1ricuMLeuc5thoe@notepad.lrtnanc.mo
     console.error('Error:', err.message);
 })
 
-const api = process.env.API_URL
-
 //handlers for the routes
 const noteRoute = require(`./routes/notes.js`);
 
