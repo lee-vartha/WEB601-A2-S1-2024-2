@@ -19,5 +19,9 @@ const noteSchema = new Schema({
     }
 });
 
+// indexing: this is used to make the search faster
+noteSchema.index({title: 'text', content: 'text'});
+noteSchema.index({createdAt: 1});
+
 // module.exports is used to export the schema to be used in the application
 module.exports = mongoose.model('Note', noteSchema);

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // this is the id of the note that is being edited (says its null so that it is always a default that a note isnt edited (since the user JUST created it))
   let editingNoteId = null; 
-  
+
     // function to show the section for the notes list
     function showNotesListSection() {
         notesListSection.style.display = 'block'; // we are making this section visible and making the others hidden
@@ -195,17 +195,18 @@ editNoteForm.addEventListener('submit', function(event) {
         }
     });
 
-
+ 
 
 
 // function to filter notes based on search input
 function filterNotes() {
     var input = document.getElementById('search-note').value.toLowerCase();
-    var notes = document.querySelectorAll('.note-item'); 
-    notes.forEach(note => { 
-        const title = note.textContent.toLowerCase(); 
-        note.style.display = title.includes(input) ? '' : 'none';
+    var notes = document.querySelectorAll('.note-item');  
+    notes.forEach(note => {  // for each note 
+        const title = note.textContent.toLowerCase();  // the title of the note will be converted to lowercase while searched
+        note.style.display = title.includes(input) ? '' : 'none'; // if the title includes the input, then the note will be shown, otherwise it will be hidden
     });
+    
 }
 
 // event listener for search input

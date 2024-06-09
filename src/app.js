@@ -32,8 +32,6 @@ mongoose.connect('mongodb+srv://lee-vartha:hyp1ricuMLeuc5thoe@notepad.lrtnanc.mo
     console.error('Error:', err.message);
 })
 
-// const db = mongoose.connection;
-
 const api = process.env.API_URL
 
 //handlers for the routes
@@ -44,7 +42,7 @@ app.use('/', noteRoute);
 
 
 // for the initialization, we are getting the notes.html file from the public folder and sending it to the user for them to access.
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
 })
 
