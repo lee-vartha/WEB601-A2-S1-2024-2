@@ -216,7 +216,7 @@ document.getElementById('search-note').addEventListener('input', filterNotes);
 // function to show the toast notifications
 function showToast(toastId) {
     const toast = document.getElementById(toastId);
-    toast.classList.add('show');
+    toast.classList.add('show'); 
     setTimeout(() => { // setting how long the notification should last
         toast.classList.remove('show');
     }, 2000); // 2000 means 2 seconds
