@@ -75,15 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // when the user clicks on the edit note button
-    document.getElementById('edit-note-btn').addEventListener('click', function() {
-        const title = document.getElementById('view-note-title').value;
-        const content = document.getElementById('view-note-content').value;
-        document.getElementById('edit-note-title').value = title;
-        document.getElementById('edit-note-content').value = content;
-        showEditNoteSection();
-    });
-
 
 // function to fetch the notes from the database
 function fetchNotes() {
@@ -124,6 +115,15 @@ function showNoteDetails(note) {
     editingNoteId = note._id; // the editing note id will be defined if the note will be edited
     showViewNoteSection(); // once all that is loaded, the 'view note' section will be shown
 }
+
+ // when the user clicks on the edit note button
+ document.getElementById('edit-note-btn').addEventListener('click', function() {
+    const title = document.getElementById('view-note-title').value; // getting the titles value of the note
+    const content = document.getElementById('view-note-content').value; // getting the content value of the note
+    document.getElementById('edit-note-title').value = title; // the title of the note will be shown in the edit note section
+    document.getElementById('edit-note-content').value = content; // the content of the note will be shown in the edit note section
+    showEditNoteSection(); // showing the edit note section
+});
 
 // the event listener when the user presses the submit button to add a note
 addNoteForm.addEventListener('submit', function(event) {
